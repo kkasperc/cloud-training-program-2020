@@ -7,24 +7,6 @@ variable "aws_secret_key" {}
 variable "private_key_path" {}
 variable "key_name" {}
 
-
-##################################################################################
-# GLOBAL VARIABLES
-##################################################################################
-
-variable "network_address_space" {
-  default = "10.0.0.0/16"
-}
-variable "subnet1_address_space" {
-  default = "10.0.1.0/24"
-}
-variable "subnet2_address_space" {
-  default = "10.0.2.0/24"
-}
-variable "region" {
-  default = "eu-west-1"
-}
-
 ##################################################################################
 # PROVIDERS
 ##################################################################################
@@ -40,8 +22,12 @@ provider "aws" {
 ##################################################################################
 
 module "network" {
-  source = "modules/network" 
+  source                = "./modules/network" 
+  network_address_space = "10.0.0.0/16"
+  subnet1_address_space = "10.0.1.0/24"
+  subnet2_address_space = "10.0.2.0/24"
+  region                = "eu-west-1"
 }
 module "instances" {
-  source = "modules/instances"
+  source = "./modules/instances"
 }

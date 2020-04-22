@@ -22,7 +22,7 @@ provider "aws" {
 ##################################################################################
 
 module "network" {
-  source                = "./modules/network" 
+  source                = "./modules/network"
   network_address_space = "10.0.0.0/16"
   subnet1_address_space = "10.0.1.0/24"
   subnet2_address_space = "10.0.2.0/24"
@@ -31,3 +31,11 @@ module "network" {
 module "instances" {
   source = "./modules/instances"
 }
+module "security_group" {
+  source = "modules/security_groups"
+}
+
+module "routing" {
+  source = "modules/routing"
+}
+

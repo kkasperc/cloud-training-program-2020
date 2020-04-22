@@ -14,13 +14,13 @@ data "aws_availability_zones" "available" {}
 
 # NETWORKING
 resource "aws_vpc" "vpc_atlantis" {
-  cidr_block           = var.network_address_space
+  cidr_block           = "${var.network_address_space}"
   enable_dns_hostnames = "true"
   tags                 = {Name = "vpc_atlantis"}
 }
 #subnet 1 is public
 resource "aws_subnet" "subnet1_bastionhost" {
-  cidr_block              = var.subnet1_address_space
+  cidr_block              = "${var.subnet1_address_space}"
   vpc_id                  = aws_vpc.vpc_atlantis.id
   map_public_ip_on_launch = "true"
   availability_zone       = data.aws_availability_zones.available.names[0]
@@ -28,7 +28,7 @@ resource "aws_subnet" "subnet1_bastionhost" {
 }
 # subnet 2 is private
 resource "aws_subnet" "subnet2_atlantis" {
-  cidr_block              = var.subnet2_address_space
+  cidr_block              = "${var.subnet2_address_space}"
   vpc_id                  = aws_vpc.vpc_atlantis.id
   map_public_ip_on_launch = "false"
   availability_zone       = data.aws_availability_zones.available.names[0]

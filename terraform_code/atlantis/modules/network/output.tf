@@ -1,20 +1,31 @@
 output "aws_vpc_name" {
-  value = aws_vpc.vpc_atlantis.name
+  value = aws_vpc.vpc_atlantis
 }
+
 output "aws_vpc_id" {
   value = aws_vpc.vpc_atlantis.id
 }
 
-output "aws_subnet1_name" {
-  value = aws_subnet.subnet1_bastionhost
-}
-output "aws_subnet1_id" {
-  value = aws_subnet.subnet1_bastionhost.id
+output "aws_public_subnet" {
+  value = aws_subnet.subnet_public_bastionhost
 }
 
-output "aws_subnet2_name" {
-  value = aws_subnet.subnet2_atlantis.name
+output "aws_public_subnet_id" {
+  value = aws_subnet.subnet_public_bastionhost.id
 }
-output "aws_subnet2_id" {
-  value = aws_subnet.subnet2_atlantis.id
+
+output "aws_private_subnet" {
+  value = aws_subnet.subnet_private_atlantis
+}
+
+output "aws_private_subnet_id" {
+  value = aws_subnet.subnet_private_atlantis.id
+}
+
+output "aws_nat_gw_id" {
+  value = aws_nat_gateway.ngw_atlantis.id
+}
+
+output "aws_igw_id"{
+  value = aws_internet_gateway.igw_atlantis.id
 }

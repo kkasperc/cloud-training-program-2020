@@ -1,16 +1,4 @@
-##################################################################################
-# LOCAL VARIABLES
-##################################################################################
-
-##################################################################################
-# DATA
-##################################################################################
-
 data "aws_availability_zones" "available" {}
-
-##################################################################################
-# RESOURCES
-##################################################################################
 
 # NETWORKING
 resource "aws_vpc" "vpc_atlantis" {
@@ -19,16 +7,16 @@ resource "aws_vpc" "vpc_atlantis" {
   tags                 = {Name = "vpc_atlantis"}
 }
 #subnet 1 is public
-resource "aws_subnet" "subnet1_bastionhost" {
-  cidr_block              = var.subnet1_address_space
+resource "aws_subnet" "subnet_public_bastionhost" {
+  cidr_block              = var.subnet_one_address_space
   vpc_id                  = aws_vpc.vpc_atlantis.id
   map_public_ip_on_launch = "true"
   availability_zone       = data.aws_availability_zones.available.names[0]
   tags                    = {Name = "subnet1_bastionhost"}
 }
 # subnet 2 is private
-resource "aws_subnet" "subnet2_atlantis" {
-  cidr_block              = var.subnet2_address_space
+resource "aws_subnet" "subnet_private_atlantis" {
+  cidr_block              = var.subnet_two_address_space
   vpc_id                  = aws_vpc.vpc_atlantis.id
   map_public_ip_on_launch = "false"
   availability_zone       = data.aws_availability_zones.available.names[0]
@@ -47,6 +35,6 @@ resource "aws_eip" "eip_atlantis" {
 
 resource "aws_nat_gateway" "ngw_atlantis" {
   allocation_id = aws_eip.eip_atlantis.id
-  subnet_id     = aws_subnet.subnet1_bastionhost.id
+  subnet_id     = aws_subnet.subnet_public_bastionhost.id
   tags          = {Name = "ngw_atlantis"}
 }

@@ -38,3 +38,23 @@ resource "aws_nat_gateway" "ngw_atlantis" {
   subnet_id     = aws_subnet.subnet_public_bastionhost.id
   tags          = {Name = "ngw_atlantis"}
 }
+data "aws_route53_zone""awisysZone"{
+  name = "aws.awisys.eu."
+  private_zone = false
+}
+
+resource "aws_route53_record" "Atlantis-A_" {
+  name = "atlantisserver.aws.awisys.eu."
+  type = "A"
+  ttl = "300"
+  records = [aws_eip.eip_atlantis.public_ip]
+  zone_id = data.aws_route53_zone.awisysZone.id
+}
+
+resource "aws_route53_record" "Atlantis-CNAME" {
+  name = "atlantis.aws.awisys.eu."
+  type = "CNAME"
+  ttl = "300"
+  records = ["AtlantisServer.aws.awisys.eu"]
+  zone_id = data.aws_route53_zone.awisysZone.id
+}

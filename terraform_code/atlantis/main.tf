@@ -16,7 +16,7 @@ variable "key_name" {
 ##################################################################################
 
 variable "region" {
-  default = "eu-west-1"
+  default = "eu-west-2"
 }
 provider "aws" {
   access_key = var.aws_access_key
@@ -38,20 +38,24 @@ module "network" {
 module "instances" {
   source = "./modules/instances"
   instance_type = "t2.micro"
-  ami_instance = "ami-04facb3ed127a2eb6"
+  #ami_instance = "ami-04facb3ed127a2eb6"  #eu-west-1
+  ami_instance = "ami-01a6e31ac994bbc09" #eu-west-2
   key_name = var.key_name
-  av_zone = "eu-west-1a"
+  av_zone = "eu-west-2a"
   atlantis_subnet = module.network.aws_private_subnet
   atlantis_subnet_id = module.network.aws_private_subnet_id
   bastion_host_subnet = module.network.aws_public_subnet
   bastion_host_subnet_id = module.network.aws_public_subnet_id
   sg_atlantis_id = module.security_group.security_group_atlantis_instance_allow_ssh_id
   sg_bastion_host_id = module.security_group.security_group_allow_ssh
+  atlantis_profile_id = module.polices.atlantis_profile_id
+
 }
 
 module "security_group" {
   source = "./modules/security_groups"
   vpc_id = module.network.aws_vpc_id
+  nat_gw_id = module.network.aws_nat_gw_id
 }
 
 module "routing" {
@@ -61,6 +65,10 @@ module "routing" {
   nat_gw_id = module.network.aws_nat_gw_id
   public_subnet_id = module.network.aws_public_subnet_id
   private_subnet_id = module.network.aws_private_subnet_id
+}
+
+module "polices" {
+  source = "./modules/polices"
 }
 
 

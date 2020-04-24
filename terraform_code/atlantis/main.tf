@@ -71,4 +71,9 @@ module "polices" {
   source = "./modules/polices"
 }
 
+module "load_balancer" {
+  source           = "./modules/load_balancer"
+  security_groups  = [module.routing.sg_atlantis_id]
+  public_subnet_id = [module.network.aws_public_subnet_id]
+}
 

@@ -73,7 +73,8 @@ module "polices" {
 
 module "load_balancer" {
   source           = "./modules/load_balancer"
-  security_group_id  = [module.routing.sg_atlantis_id]
+  security_group_id  = [module.security_group.security_group_atlantis_instance_allow_ssh_id]
   public_subnet_id = [module.network.aws_public_subnet_id]
+  public1_subnet_id = [module.network.aws_public1_subnet_id]
 }
 

@@ -14,6 +14,15 @@ resource "aws_subnet" "subnet_public_bastionhost" {
   availability_zone       = data.aws_availability_zones.available.names[0]
   tags                    = {Name = "subnet1_bastionhost"}
 }
+#subnet 2 is public
+resource "aws_subnet" "subnet_public1_bastionhost" {
+  cidr_block              = var.subnet_one_address_space
+  vpc_id                  = aws_vpc.vpc_atlantis.id
+  map_public_ip_on_launch = "true"
+  availability_zone       = data.aws_availability_zones.available.names[1]
+  tags                    = {Name = "subnet1b_bastionhost"}
+}
+
 # subnet 2 is private
 resource "aws_subnet" "subnet_private_atlantis" {
   cidr_block              = var.subnet_two_address_space

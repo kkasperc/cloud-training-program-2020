@@ -1,6 +1,6 @@
-aws_access_key = "AKIAQJBA56IQNGI4ZCMJ"
+aws_access_key = "AKIAQJBA56IQDTG3N3N3"
 
-aws_secret_key = "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"
+aws_secret_key = "Gf7DGZ8DkezcqLt3k2m6oXamX2KpKQ3yIXie617y"
 
 key_name = "EC2-EU-W2"
 

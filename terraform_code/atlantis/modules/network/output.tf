@@ -9,6 +9,12 @@ output "aws_vpc_id" {
 output "aws_public_subnet" {
   value = aws_subnet.subnet_public_bastionhost
 }
+output "aws_public1_subnet" {
+  value = aws_subnet.subnet_public1_bastionhost
+}
+output "aws_public1_subnet_id" {
+  value = aws_subnet.subnet_public1_bastionhost.id
+}
 
 output "aws_public_subnet_id" {
   value = aws_subnet.subnet_public_bastionhost.id

@@ -1,7 +1,7 @@
-aws_access_key = "AKIAQJBA56IQDTG3N3N3"
+aws_access_key = "XXXXXXXXXXXXXXXXX"
 
-aws_secret_key = "Gf7DGZ8DkezcqLt3k2m6oXamX2KpKQ3yIXie617y"
+aws_secret_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
-key_name = "EC2-EU-W2"
+key_name = "Key name with out pem extension"
 
-private_key_path = "C:\\GFT\\Repository\\cloud-training-program-2020\\terraform_code\\atlantis\\EC2-EU-W2.pem"
+private_key_path = "<filepath>\\pem"

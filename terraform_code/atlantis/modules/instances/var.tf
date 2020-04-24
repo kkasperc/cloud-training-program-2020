@@ -5,7 +5,7 @@ variable "ami_instance" {
 variable "instance_type" {}
 
 variable "av_zone" {}
-
+variable "atlantis_profile_id" {}
 variable "key_name" {}
 
 variable "bastion_host_subnet" {}

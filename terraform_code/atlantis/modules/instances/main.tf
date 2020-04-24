@@ -22,9 +22,11 @@ resource "aws_instance" "ATLANTIS_HOST" {
   depends_on = [var.atlantis_subnet]
   subnet_id = var.atlantis_subnet_id
   associate_public_ip_address = "false"
+  iam_instance_profile = var.atlantis_profile_id
   key_name = var.key_name
   vpc_security_group_ids = [var.sg_atlantis_id]
   tags ={
     Name = "ATLANTIS_HOST"
   }
+  user_data = file("./modules/instances/resources/service.sh")
 }

@@ -5,7 +5,7 @@ resource "aws_security_group" "sg_allow_ssh" {
     from_port = 22
     protocol = "tcp"
     to_port = 22
-    cidr_blocks = ["31.182.230.160/32"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
     from_port = 0
@@ -27,6 +27,14 @@ resource "aws_security_group" "sg_atlantis_instance_allow_ssh" {
     to_port = 22
     security_groups = [aws_security_group.sg_allow_ssh.id]
   }
+
+  ingress {
+    from_port   = 4141
+    to_port = 4141
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     from_port = 0
     protocol = -1
